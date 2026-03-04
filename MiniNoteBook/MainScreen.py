@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox, filedialog
 import requests
 import threading
+import os
 
 class SimpleUI:
     def __init__(self):
@@ -49,9 +50,10 @@ class SimpleUI:
 
             # Upload the PDF as multipart/form-data; server expects an UploadFile named 'file'
             with open(self.pdf_path, "rb") as f:
-                files = {"file": (self.pdf_path.split("\\")[-1], f, "application/pdf")}
+                filename = os.path.basename(self.pdf_path)
+                files = {"file": (filename, f, "application/pdf")}
                 data = {"query": query}
-                print(f"Sending query: {query}"," PDF: {self.pdf_path}")
+                print(f"Sending query: {query}, PDF: {self.pdf_path}")
                 response = requests.post(
                     "http://127.0.0.1:9001/chat",
                     data=data,

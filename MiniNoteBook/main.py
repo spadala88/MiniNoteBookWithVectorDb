@@ -22,13 +22,14 @@ async def chat(
     pdf_path = None
 
     if file:
-        if file.content_type != "application/pdf":
-            raise HTTPException(
-                status_code=400,
-                detail="Only PDF files are supported"
-            )
+        # if file.content_type != "application/pdf":
+        #     raise HTTPException(
+        #         status_code=400,
+        #         detail="Only PDF files are supported"
+        #     )
 
         pdf_path = os.path.join(UPLOAD_DIR, file.filename)
+        print(f"Saving uploaded PDF to: {pdf_path}")
 
         with open(pdf_path, "wb") as f:
             f.write(await file.read())

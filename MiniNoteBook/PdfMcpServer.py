@@ -20,6 +20,7 @@ embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
     description="Ingest a PDF (chunk, embed, store), then retrieve relevant chunks to answer a query."
 )
 def ingest_and_query_pdf(pdf_path: str, query: str) -> dict:
+    print(f"Received PDF path: {pdf_path}, Query: {query}")
     if not pdf_path:
         raise ValueError("pdf_path is required")
 
